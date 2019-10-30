@@ -1,0 +1,10 @@
+{
+	"accounts":	
+	[
+		{"login":"admin","password":"123456"},
+		{"login":"adminn","password":"1234567"},
+		{"login":"adminnn","password":"12345678"},
+		{"login":"adminnnn","password":"123456789"},
+		{"login":"adminnnnn","password":"1234567890"}
+	]
+}

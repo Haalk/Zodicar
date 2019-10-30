@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/SplashScreen.png</file>
+        <file>img/zodiak.png</file>
+        <file>img/meat.png</file>
+        <file>img/iconExit.ico</file>
+        <file>img/discountCard.png</file>
+        <file>src/accounts.json</file>
+    </qresource>
+</RCC>
