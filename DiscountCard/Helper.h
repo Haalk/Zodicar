@@ -56,6 +56,7 @@ namespace NDiscountPercent
 
 const int CARD_SIZE = 10;
 const int PHONE_SIZE = 10;
+const QString NAME_TABLE = "CLIENT";
 
 
 #endif // HELPER_H

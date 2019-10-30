@@ -37,7 +37,7 @@ public:
     QSqlTableModel  *getModel();
 
     void saveDatabase();
-
+    const QString getRecordName(const int fieldNumber) const;
 private:
     QSqlDatabase * m_database;
 

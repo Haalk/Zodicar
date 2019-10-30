@@ -3,6 +3,7 @@
 #include "database.h"
 #include <QHeaderView>
 #include <QSqlTableModel>
+#include "Helper.h"
 
 DatabaseView::DatabaseView(QWidget *parent) : QWidget(parent)
 {

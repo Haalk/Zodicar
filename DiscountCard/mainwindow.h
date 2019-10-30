@@ -11,6 +11,7 @@
 #include "databaseview.h"
 #include "editmode.h"
 #include "scanmanager.h"
+#include "currentclient.h"
 
 class Authorization;
 
@@ -35,6 +36,7 @@ private:
     Buttons *m_buttons;
     EditMode *m_editMode;
     ScanManager *m_scanManager;
+    CurrentClient *m_currentClient;
 private:
     int init();
 

@@ -188,5 +188,10 @@ void Database::saveDatabase()
     }
 }
 
+const QString Database::getRecordName(const int fieldNumber) const
+{
+    return sqltablemodel->record().fieldName(fieldNumber);
+}
+
 
 // close bd

@@ -5,7 +5,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), m_loadManager(new LoadManager),m_accountManager(new AccountManager),
       m_menuBar(new MenuBar), m_newClient(new NewClient),m_buttons(new Buttons),m_databaseView(new DatabaseView),
-      m_editMode(new EditMode(*m_buttons)),m_scanManager(new ScanManager)
+      m_editMode(new EditMode(*m_buttons)),m_scanManager(new ScanManager),m_currentClient(new CurrentClient)
 {
     setWindowIcon(QIcon(QPixmap(":/img/discountCard.png")));
 }
@@ -20,6 +20,7 @@ MainWindow::~MainWindow()
     delete m_databaseView;
     delete m_editMode;
     delete m_scanManager;
+    delete m_currentClient;
 }
 
 void MainWindow::show()
@@ -40,6 +41,7 @@ int MainWindow::Init()
     m_databaseView->Init();
     m_buttons->Init();
     m_scanManager->Init();
+    m_currentClient->Init();
     init();
     m_accountManager->Init();
     m_accountManager->Show();     //delete after comment
@@ -48,6 +50,8 @@ int MainWindow::Init()
 
 
     qDebug("MainWindow::Init() end");
+
+    //qDebug() << "SIZE " + QString::number(this->size().width() - m_databaseView->size().width());
 
     return 1;
 }
@@ -91,6 +95,7 @@ void MainWindow::connecting()
     connect(m_buttons->getButton(NButtonsName::ShowDatabase),&QPushButton::clicked,m_databaseView,&DatabaseView::showDatabase);
     //connect(m_buttons->getButton(NButtonsName::Edit),&QPushButton::clicked,m_buttons,&Buttons::setEnableButton);
     connect(m_buttons->getButton(NButtonsName::Scan),&QPushButton::clicked,m_scanManager,&ScanManager::showScanWindow);
+    connect(m_scanManager,&ScanManager::SScanSuccessful,m_currentClient,&CurrentClient::showClient);
 }
 
 void MainWindow::initLayout()
@@ -123,6 +128,7 @@ void MainWindow::initLayout()
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->addItem(vlayout2);
     mainLayout->addItem(vlayout1);
+    mainLayout->addItem(m_currentClient->getLayout());
 
     central->setLayout(mainLayout);
     setCentralWidget(central);

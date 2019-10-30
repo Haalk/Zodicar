@@ -69,7 +69,7 @@ void ScanManager::connection()
     connect(m_lineInput,&QLineEdit::textChanged,this,&ScanManager::checkCorrectInput);
 }
 
-bool ScanManager::checkCorrectInput()
+void ScanManager::checkCorrectInput()
 {
     if(m_lineInput->hasAcceptableInput())
     {
@@ -79,18 +79,29 @@ bool ScanManager::checkCorrectInput()
     {
         m_buttonScan->setEnabled(false);
     }
-
-    return true;    //
 }
 #include "database.h"
-bool ScanManager::checkScan()
+void ScanManager::checkScan()
 {
     QString what = m_radioButtonCard->isChecked() ? "ID" : m_radioButtonPhone ? "PHONE" : "ERROR";
     if(what == "ERROR")
     {
-        return false;
+        return;
     }
     bool isFound = !Database::Instance()->isAvailable(what,what,m_lineInput->text());
     qDebug() << "ScanManager::checkScan()" + QString::number(isFound);
-    return isFound;
+    if(isFound)
+    {
+        m_dialog->close();
+        emit SScanSuccessful(what,m_lineInput->text());
+        m_lineInput->clear();
+        return;
+    }
+//    QDialog *dialog = new QDialog(this);
+//    QLabel labelNotFound("This client is not found");
+//    QPushButton buttonOK("Ok");
+//    QVBoxLayout lay;
+    QMessageBox msgBox(QMessageBox::Warning,"Client is not found","Client is not found in database.\nCheck input or add new client!",
+                       QMessageBox::StandardButton::Ok);
+    msgBox.exec();
 }

@@ -27,10 +27,11 @@ private:
 
 private:
     void connection();
-    bool checkCorrectInput();
-    bool checkScan();
-signals:
+    void checkCorrectInput();
+    void checkScan();
 
+signals:
+    void SScanSuccessful(const QString &what,const QString &value);
 public slots:
 };
 
